@@ -1,7 +1,12 @@
 <main>
-  @for(post of post$ | async; track $index) {
-  <h1>{{ post.title }}</h1>
-  <p>{{ post.nbr_like }}</p>
-  <button (click)="onLike(post)">like</button>
+  @for(type of getPostType((post$ | async)!); track $index) {
+    <article class="type">
+      <h2>{{ type }}</h2>
+      @for(post of getPostByType((post$ | async)!, type); track $index) {
+        <div class="post">
+          <h3>{{ post.title }}</h3>
+        </div>
+      }
+    </article>
   }
 </main>
